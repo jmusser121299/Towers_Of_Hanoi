@@ -39,7 +39,7 @@ public class Ring {
 	
 	public void printRing() {
 		System.out.print("[");
-		for(int i = 1; i < this.value * 2; i++) {
+		for(int i = 1; i < (this.value * 2) + 1; i++) {
 			System.out.print(" ");
 			if(i == this.value)
 				System.out.print(i);

@@ -2,23 +2,24 @@
 public class ToH_Controller {
 	private int level;
 	private Tower[] towers;
-	private int moves;
-	private int[] last_move;
+	private int move_counter;
+	private Stack<int[]> moves;
 	
 	public ToH_Controller(int level) {
 		this.setLevel(level);
 		this.setTowers(3);
-		this.setMoves(0);
+		this.setMoveCounter(0);
 	}
 	
 	public ToH_Controller(int level, int num_towers) {
 		this.setLevel(level);
 		this.setTowers(num_towers);
-		this.setMoves(0);
+		this.setMoveCounter(0);
 	}
 	
 	public void move(int from, int to) {
 		//TODO move the top ring from the "from" tower to the "to" tower
+		
 	}
 	
 	public int level() {
@@ -43,26 +44,36 @@ public class ToH_Controller {
 			
 	}
 
-	public int getMoves() {
-		return moves;
+	public int getMoveCounter() {
+		return move_counter;
 	}
 
-	public void setMoves(int moves) {
-		this.moves = moves;
+	public void setMoveCounter(int moves) {
+		this.move_counter = moves;
 	}
 
 	public int[] last_move() {
-		return last_move;
+		try {
+			return this.moves.peek();
+		} catch (EmptyStackException e) {
+			return null;
+		}
 	}
 
-	public void setLast_move(int from, int to) {
-		this.last_move = new int[]{from, to};
-	}
+
 	
 	public void printTowers() {
 		
 		for(int i = 0; i < this.towers.length; i++)
 			this.towers[i].printTower(i+1, this.level);
 		
+	}
+
+	public Stack<int[]> getMoves() {
+		return moves;
+	}
+
+	public void setMoves() {
+		this.moves = new Stack<int[]>();
 	}
 }

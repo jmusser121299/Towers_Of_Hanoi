@@ -36,24 +36,32 @@ public class Tower {
 	
 	public void printTower(int tower_number, int level) {
 		System.out.println("Tower " + tower_number + ":\n");
-		for(int i = level; i >= 0; i--) {
-			if(i >= this.tower.size() && !this.tower.isEmpty()) {
-				for(int j = 0; j < level; j++)
-					System.out.print(" ");
-				System.out.println("|");
+		printPadding(level+1);
+		System.out.println("|");
+		for(int i = 0; i < level; i++) {
+			if(i >= level - tower.size()) {
+				Ring r = this.tower.get(i-(level - tower.size()));
+				printPadding(level - r.value());
+				r.printRing();
 			} else {
-				if(i == 0) {
-					for(int j = 0; j < ((level + 1) * 2) + 1; j++)
-						System.out.print("_");
-					System.out.println();
-				} else {
-					for(int j = 0; j < level - (i + 1); j ++)
-						System.out.print(" ");
-					this.tower.get(i).printRing();
-				}
+				printPadding(level+1);
+				System.out.println("|");
 			}
 		}
+		System.out.print("<");
+		for(int i = 0; i < ((level)*2) + 1; i++) {
+			if(i%2==0)
+				System.out.print("/");
+			else
+				System.out.print("\\");
+		}
+		System.out.println(">\n");
 	}
+	private void printPadding(int n) {
+		for(int i = 0; i < n; i++)
+			System.out.print(" ");
+	}
+
 	public ArrayList<Ring> getTower() {
 		return tower;
 	}
